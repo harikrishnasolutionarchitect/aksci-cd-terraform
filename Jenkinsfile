@@ -15,8 +15,7 @@ pipeline {
       checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'git_creds', url: 'https://github.com/harikrishnapalakila/aksapicd.git']])
     }
     }  
-   
-     
+       
     
     
     stage('ce-terraform-cms-api-deployment-preprod') {
