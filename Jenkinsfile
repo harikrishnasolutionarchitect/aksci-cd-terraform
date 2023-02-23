@@ -29,7 +29,7 @@ pipeline {
                   docker.withRegistry('http://${acr_url}', 'acrCredentail') {
                             cmsapi.push("latest")
                             cmsapi.push("${env.BUILD_ID}")
-                    }
+                    } 
                 }
             }
         }
