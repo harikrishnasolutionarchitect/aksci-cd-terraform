@@ -3,7 +3,7 @@ pipeline {
   environment {
   acr_registry = "apinode"
   acr_url = "apinode.azurecr.io"
-  acrCredentail = "ACR"
+  acrCredentail = 'ACR'
   cmsapi = ''
    
   }
