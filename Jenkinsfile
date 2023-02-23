@@ -17,7 +17,17 @@ pipeline {
                 }
             }
         }
-    
+    stage("ce-terraform-cms-api-push") {
+            steps {
+                script {
+                  // This step should not normally be used in your script. Consult the inline help for details.
+                 withDockerRegistry(credentialsId: 'ACR', url: 'apinode.azurecr.io') {
+                            cmsapi.push("latest")
+                            cmsapi.push("${env.BUILD_ID}")
+                    }
+                }
+            }
+        }
   
   }
 
