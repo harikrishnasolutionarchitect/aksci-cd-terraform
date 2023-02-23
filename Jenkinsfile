@@ -4,7 +4,7 @@ pipeline {
   acr_registryName = "apinode"
   acr_url = "apinode.azurecr.io"
   acrCredentail = 'ACR'
-  cmsapi = ''
+  cmsapi = '' 
    
   }
   stages {
