@@ -1,5 +1,7 @@
 pipeline {
-  agent any
+  agent {
+    label 'SFDeployJenkins01'
+   }
   environment {
   acr_registryName = "apinode"
   acr_url = "apinode.azurecr.io"
