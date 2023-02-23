@@ -35,6 +35,24 @@ pipeline {
         }
     
     
+    // Testing docker image from acr 
+	
+	stage('cleanup existing containers') {
+	 steps{
+	   sh 'docker ps -f name=apinodehc -q | xargs --no-run-if-empty docker container stop'
+	   sh 'docker container ls -a -f name=apinodehc -q | xargs -r docker container rm'	 
+	 }	
+	}
+	
+	stage('pull & spiwn containers') {
+	 steps{
+	   script {
+	   sh 'docker run -d -p 8096:5000 --rm --name apinodehc ${acr_url}/${acr_registryName}'
+	   }
+	 }	
+	}
+    
+    
   
   }
 
