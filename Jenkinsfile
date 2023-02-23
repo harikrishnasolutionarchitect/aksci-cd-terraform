@@ -23,7 +23,7 @@ pipeline {
     stage('ce-terraform-cms-api-deployment-preprod') {
       steps {
         script {
-          kubernetesDeploy(configs: "*.yml", kubeconfigId: "kubeconfig", enableConfigSubstitution: true)
+          kubernetesDeploy(configs: "deploymentservice.yml", kubeconfigId: "kubeconfig", enableConfigSubstitution: true)
         }
       }
     }
