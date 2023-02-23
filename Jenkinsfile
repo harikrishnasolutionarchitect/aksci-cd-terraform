@@ -1,7 +1,7 @@
 pipeline {
   agent any
   environment {
-  acr_registry = "apinode"
+  acr_registryName = "apinode"
   acr_url = "apinode.azurecr.io"
   acrCredentail = 'ACR'
   cmsapi = ''
@@ -16,7 +16,7 @@ pipeline {
     stage("ce-terraform-cms-api-build") {
             steps {
                 script {
-                  cmsapi = docker.build("${acr_registry}:${env.BUILD_ID}")
+                  cmsapi = docker.build("${acr_registryName}:${env.BUILD_ID}")
                     
                 }
             }
