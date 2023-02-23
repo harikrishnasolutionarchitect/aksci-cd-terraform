@@ -47,7 +47,7 @@ pipeline {
 	stage('pull & spiwn containers') {
 	 steps{
 	   script {
-	   sh 'docker run -d -p 8096:5000 --add-host=apinode.westeurope.cloudapp.azure.com:10.0.2.4 --rm --name apinodehc ${acr_url}/${acr_registryName}'
+	   sh 'docker run -d -p 80:5000 --rm --name apinodehc ${acr_url}/${acr_registryName}'
 	   }
 	 }	
 	}
