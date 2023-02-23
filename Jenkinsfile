@@ -35,7 +35,7 @@ pipeline {
         }
     
     
-    // Testing docker image from acr 
+    // Testing docker image from acr  
 	
 	stage('cleanup existing containers') {
 	 steps{
