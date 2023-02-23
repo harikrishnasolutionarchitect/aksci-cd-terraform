@@ -2,6 +2,10 @@ pipeline {
   agent any
   environment {
   acr_registry = "apinode"
+  acr_url = "apinode.azurecr.io"
+  acrCredentail = "ACR"
+  cmsapi = ''
+   
   }
   stages {
     stage('checkout scm') {
@@ -17,17 +21,20 @@ pipeline {
                 }
             }
         }
+    
+    
     stage("ce-terraform-cms-api-push") {
             steps {
                 script {
-                  // This step should not normally be used in your script. Consult the inline help for details.
-                 withDockerRegistry(credentialsId: 'ACR', url: 'http://apinode.azurecr.io') {
+                  docker.withRegistry('http://${acr_url}', 'acrCredentail') {
                             cmsapi.push("latest")
                             cmsapi.push("${env.BUILD_ID}")
                     }
                 }
             }
         }
+    
+    
   
   }
 
