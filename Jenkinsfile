@@ -47,7 +47,7 @@ pipeline {
 	stage('pull & spiwn containers') {
 	 steps{
 	   script {
-	   sh 'docker run -d -p 4000:5000 --rm --name apinodehc ${acr_url}/${acr_registryName}'
+	   sh 'docker run -d -p 8080:5000 --rm --name apinodehc ${acr_url}/${acr_registryName}'
 	   }
 	 }	
 	}
