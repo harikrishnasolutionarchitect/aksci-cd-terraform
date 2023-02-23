@@ -12,7 +12,8 @@ pipeline {
     stage("ce-terraform-cms-api-build") {
             steps {
                 script {
-                    cmsapi = docker.build acr_registry
+                    cmsapi = docker.build("apinode.azurecr.io/apinode:${env.BUILD_ID}")
+                    
                 }
             }
         }
