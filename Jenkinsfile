@@ -26,7 +26,7 @@ pipeline {
     stage("ce-terraform-cms-api-push") {
             steps {
                 script {
-                  docker.withRegistry('http://${acr_url}', 'acrCredentail') {
+                  docker.withRegistry("http://${acr_url}", acrCredentail) {
                             cmsapi.push("latest")
                             cmsapi.push("${env.BUILD_ID}")
                     } 
