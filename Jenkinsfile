@@ -1,8 +1,6 @@
 pipeline {
   agent any
   environment {
-  git_creds = "git_creds"
-  git_url   = "https://github.com/harikrishnapalakila/aksapicd.git"
   registryName = "appapinode"
   registryUrl = "appapinode.azurecr.io"
   registryCredential = 'ACR'
@@ -14,7 +12,7 @@ pipeline {
   stages {
     stage('checkout scm') {
       steps{
-      checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'git_creds', url: '$git_url']])
+      checkout([$class: "GitSCM", branches: [[name: '*/master']], git_URL: 'https://github.com/harikrishnapalakila/aksapicd.git'])
     }
     }
     stage('maven build') {
