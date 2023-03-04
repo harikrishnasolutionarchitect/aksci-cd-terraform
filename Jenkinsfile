@@ -1,7 +1,5 @@
 pipeline {
-  agent {
-    label 'Jenkins-build-slave'
-   }
+  agent any
   environment {
   git_creds = "git_creds"
   git_url   = "https://github.com/harikrishnapalakila/aksapicd.git"
