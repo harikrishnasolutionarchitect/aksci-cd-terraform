@@ -30,7 +30,7 @@ pipeline {
     }
     stage('Docker push ') {
       steps{
-	      withDockerRegistry[url: acr_url, credentialsId: ACR] {
+	 docker.withRegistry(url: acr_url, credentialsId: ACR) {
 	  appapinode = docker.image(acr_url)
 	  docker.push("${BUILD_ID}")
 	  docker.push('latest')
