@@ -8,6 +8,7 @@ pipeline {
   acr_registryName = "appapinode"
   acr_url = "appapinode.azurecr.io"
   appapi = '' 
+	  
    
 	  
   }
