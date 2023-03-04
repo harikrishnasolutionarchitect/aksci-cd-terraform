@@ -5,14 +5,11 @@ pipeline {
   registryUrl = "appapinode.azurecr.io"
   registryCredential = 'ACR'
   appapinode = '' 
-	  
-	  
   }
   stages {
     stage('checkout scm') {
       steps{
       checkout([$class: "GitSCM", branches: [[name: '*/master']], git_URL: 'https://github.com/harikrishnapalakila/aksapicd.git'])
-    }
     }
     }
     stage('Docker build') {
@@ -39,4 +36,5 @@ pipeline {
         }
       }
     } 
+   }
    }
