@@ -23,7 +23,7 @@ pipeline {
     stage('Docker push ') {
       steps{
 	      script {
-		      docker.withRegistry("http://appapinode.azurecr.io", registryName) {
+		      docker.withRegistry("http://appapinode.azurecr.io", registryCredential) {
 	             appapinode.push("${BUILD_ID}")
 	             appapinode.push('latest')
 	 }
