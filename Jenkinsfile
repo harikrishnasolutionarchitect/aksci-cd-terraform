@@ -5,9 +5,10 @@ pipeline {
   environment {
   git_creds = "git_creds"
   git_url   = "https://github.com/harikrishnapalakila/aksapicd.git"
-  acr_registryName = "appapinode"
-  acr_url = "appapinode.azurecr.io"
-  appapi = '' 
+  registryName = "appapinode"
+  registryUrl = "appapinode.azurecr.io"
+  registryCredential = 'ACR'
+  appapinode = '' 
 	  
    
 	  
@@ -25,16 +26,17 @@ pipeline {
     }
     stage('Docker build') {
 	    steps{
-      appapinode = docker.build(acr_registryName)	  
+      appapinode = docker.build registryName	  
     }
     }
     stage('Docker push ') {
       steps{
-	 docker.withRegistry(url: acr_url, credentialsId: ACR) {
-	  appapinode = docker.image(acr_url)
-	  docker.push("${BUILD_ID}")
-	  docker.push('latest')
-	  }
+	      script {
+		      docker.withRegistry("http://${acr_url}", registryName) {
+	             appapinode.push("${BUILD_ID}")
+	             appapinode.push('latest')
+	 }
+	      }
     }
     }
     stage('ce-terraform-cms-api-deployment-preprod') {
