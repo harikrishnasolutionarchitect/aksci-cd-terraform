@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nodeapp-deployment
-  namespace: apinode
+  namespace: default
   labels:
     app: nodeapp
 spec:
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: nodeserver
-        image: apinode.azurecr.io/apinode:latest
+        image: appapinode.azurecr.io:latest
         ports:
         - containerPort: 3000   
         
@@ -28,7 +28,7 @@ apiVersion: apps/v1
 kind: Service
 metadata:
   name: nodeapp-service
-  namespace: apinode
+  namespace: default
 spec:
   selector:
     app: nodeapp 
