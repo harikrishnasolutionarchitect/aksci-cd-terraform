@@ -24,13 +24,13 @@ pipeline {
     }
     stage('Docker build') {
       steps{
-	  withDockerRegistry[url: ${acr_url}, credentialsId: 'ACR']
+	      withDockerRegistry[url: ${acr_url}, credentialsId: '${ACR}']
       appapinode = docker.build("${acr_url}:${env.BUILD_ID}")	  
     }
     }
     stage('Docker push ') {
       steps{
-      withDockerRegistry[url: ${acr_url}, credentialsId: 'ACR'] {
+	      withDockerRegistry[url: ${acr_url}, credentialsId: '${ACR}'] {
 	  appapinode = docker.image("${acr_url}:${env.BUILD_ID}")
 	  docker.push("${BUILD_ID}")
 	  docker.push('latest')
