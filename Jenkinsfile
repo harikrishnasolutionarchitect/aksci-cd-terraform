@@ -5,6 +5,7 @@ pipeline {
   registryUrl = "appapinode.azurecr.io"
   registryCredential = 'ACR'
   appapinode = '' 
+	  
   }
   stages {
     stage('checkout scm') {
