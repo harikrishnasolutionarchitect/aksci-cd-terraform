@@ -26,7 +26,9 @@ pipeline {
     }
     stage('Docker build') {
 	    steps{
+		    script {
       appapinode = docker.build registryName	  
+		    }
     }
     }
     stage('Docker push ') {
