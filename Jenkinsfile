@@ -7,7 +7,6 @@ pipeline {
   git_url   = "https://github.com/harikrishnapalakila/aksapicd.git"
   acr_registryName = "appapinode"
   acr_url = "appapinode.azurecr.io"
-  acr_creds = 'ACR'
   appapi = '' 
    
 	  
@@ -25,13 +24,13 @@ pipeline {
     }
     stage('Docker build') {
       steps{
-	  withDockerRegistry[url: ${acr_url}, credentialsId: 'acr_creds']
+	  withDockerRegistry[url: ${acr_url}, credentialsId: 'ACR']
       appapinode = docker.build("${acr_url}:${env.BUILD_ID}")	  
     }
     }
     stage('Docker push ') {
       steps{
-      withDockerRegistry[url: ${acr_url}, credentialsId: 'acr_creds'] {
+      withDockerRegistry[url: ${acr_url}, credentialsId: 'ACR'] {
 	  appapinode = docker.image("${acr_url}:${env.BUILD_ID}")
 	  docker.push("${BUILD_ID}")
 	  docker.push('latest')
