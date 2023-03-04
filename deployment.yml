@@ -18,4 +18,4 @@ spec:
       - name: nodeserver
         image: appapinode.azurecr.io/appapinode:latest
         ports:
-        - containerPort: 3000 
+        - containerPort: 3000
