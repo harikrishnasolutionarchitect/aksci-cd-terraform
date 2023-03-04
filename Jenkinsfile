@@ -24,7 +24,7 @@ pipeline {
     }
     stage('Docker build') {
 	    steps{
-      appapinode = docker.build(acr_registryName:"${env.BUILD_ID}")	  
+      appapinode = docker.build(acr_registryName)	  
     }
     }
     stage('Docker push ') {
