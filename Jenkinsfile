@@ -38,17 +38,6 @@ pipeline {
 	  }
     }
     }
-
-    #stage {
-    # steps {
-     #  withDockerRegistry[url: ${ACR_url}, credentialsId: ${ACR_creds} ]
-     #  appapinode = docker.image("${ACR_REGISTRY}":latest)
-     #  appapinode.pull()
-     #  sh '''
-      #     echo "Switch to Dev-node-hf folder"
-      #     cd /node-k8s-hc && kubectl apply -f *
-	#}
-	#}
     stage('ce-terraform-cms-api-deployment-preprod') {
       steps {
         script {
