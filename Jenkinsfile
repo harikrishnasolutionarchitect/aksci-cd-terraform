@@ -10,6 +10,7 @@ pipeline {
   acr_creds = 'ACR'
   appapi = '' 
    
+	  
   }
   stages {
     stage('checkout scm') {
