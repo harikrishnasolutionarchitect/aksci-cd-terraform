@@ -15,10 +15,6 @@ pipeline {
       checkout([$class: "GitSCM", branches: [[name: '*/master']], git_URL: 'https://github.com/harikrishnapalakila/aksapicd.git'])
     }
     }
-    stage('maven build') {
-      steps{
-       sh 'maven clean install'
-    }
     }
     stage('Docker build') {
 	    steps{
