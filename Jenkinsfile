@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  tools { 
+        maven 'maven3'
+    }
   environment {
   registryName = "appapinode"
   registryUrl = "appapinode.azurecr.io"
