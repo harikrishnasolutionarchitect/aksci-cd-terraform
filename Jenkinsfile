@@ -27,16 +27,13 @@ pipeline {
 	  }
 	  
 	  stage ("sonar-publish"){
-		  environment {
-                scannerHome = tool 'sonar'
-            }
-			steps {
-				script {
-				echo "===========Performing Sonar Scan============"
-				sh '${scannerHome}/bin/sonar-scanner --version'
-                                 }
-			}
-		}
+	   steps {
+		   script {
+			   echo "===========Performing Sonar Scan============"
+			   sh '${tool}/bin/sonar-scanner --version'
+		   }
+	   }
+	  }
 	  
 	
     stage('Docker build') {
