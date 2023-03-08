@@ -7,6 +7,7 @@ pipeline {
   appapinode = '' 
 	  
 	  
+	  
   }
   stages {
     stage('checkout scm') {
