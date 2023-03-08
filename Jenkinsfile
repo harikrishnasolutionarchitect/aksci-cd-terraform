@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  options {
+    buildDiscarder(logRotator(numToKeepStr: '5', artifactNumToKeepStr: '30'))
+  }
   environment {
   registryName = "appapinode"
   registryUrl = "appapinode.azurecr.io"
