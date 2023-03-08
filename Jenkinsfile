@@ -16,6 +16,15 @@ pipeline {
       checkout([$class: "GitSCM", branches: [[name: '*/master']], git_URL: 'https://github.com/harikrishnapalakila/aksapicd.git'])
     }
     }
+	  stage('SAST'){
+		  steps {
+		  echo "================== SAST==================="
+	          sh '''
+		   docker run -d -p 9000:9000 sonarqube
+		   '''
+		  
+		  }
+	  }
 	
     stage('Docker build') {
 	    steps{
