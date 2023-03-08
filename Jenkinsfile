@@ -8,7 +8,6 @@ pipeline {
   registryUrl = "appapinode.azurecr.io"
   registryCredential = 'ACR'
   appapinode = ''  
-	 
 	  
   }
   stages {
