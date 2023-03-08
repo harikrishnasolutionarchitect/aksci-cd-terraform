@@ -32,6 +32,9 @@ pipeline {
 	  stage ("sonar-publish"){
 			steps {
 				echo "===========Performing Sonar Scan============"
+				script {
+                                scannerHome = tool 'sonar'
+                                 }
 				withSonarQubeEnv('sonar')
 				sh "${tool("sonar")}/bin/sonar-scanner"
 			}
