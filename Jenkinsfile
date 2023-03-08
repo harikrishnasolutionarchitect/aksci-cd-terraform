@@ -22,12 +22,7 @@ pipeline {
 	          sh '''
 		   docker run -d -p 9000:9000 sonarqube
 		
-		   ids=$(docker ps -a -q)
-for id in $ids
-do
-  echo "$id"
-  docker stop $id && docker rm $id
-done
+		   docker stop sonarqube || true && docker rm sonarqube || true
 		
 		
 		   '''
