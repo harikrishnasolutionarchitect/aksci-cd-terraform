@@ -21,11 +21,15 @@ pipeline {
 		  echo "================== SAST==================="
 	          sh '''
 		   docker run -d -p 9000:9000 sonarqube
-		   CONTAINER_NAME="sonarqube"
-                   OLD="$(docker ps --all --quiet --filter=name="$CONTAINER_NAME")"
-                   if [ -n "$OLD" ]; then
-                   docker stop $OLD && docker rm $OLD
-                  fi
+		
+		   ids=$(docker ps -a -q)
+for id in $ids
+do
+  echo "$id"
+  docker stop $id && docker rm $id
+done
+		
+		
 		   '''
 		  
 		  }
