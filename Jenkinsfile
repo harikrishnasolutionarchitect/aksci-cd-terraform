@@ -24,7 +24,8 @@ pipeline {
 		  steps {
 		  echo "================== SAST==================="
 	          sh '''
-		   docker run -d --rm --volume \$(pwd) -p 9000:9000 sonarqube		
+		   docker run -d --rm --volume \$(pwd) -p 9000:9000 sonarqube	
+
 		   '''		  
 		  }
 	  }
