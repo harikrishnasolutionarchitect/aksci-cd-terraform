@@ -20,9 +20,9 @@ pipeline {
 		  steps {
 		  echo "================== SAST==================="
 	          sh '''
-		   docker run -d -p 9000:9000 sonarqube
+		   docker run --rm --volume \$(pwd) -p 9000:9000 sonarqube
 		
-		   docker stop sonarqube || true && docker rm sonarqube || true
+
 		
 		
 		   '''
