@@ -25,6 +25,13 @@ pipeline {
 		  }
 	  }
 	  
+	  stage ("sonar-publish"){
+			steps {
+				echo "===========Performing Sonar Scan============"
+				sh "${tool("sonar")}/bin/sonar-scanner"
+			}
+		}
+	  
 	
     stage('Docker build') {
 	    steps{
