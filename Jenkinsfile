@@ -18,8 +18,7 @@ pipeline {
 	  stage('SAST') {
 		  steps{
 		  sh """
-                        python app.py // Execute python
-                        mvn clean install // Execute maven
+                        mvn clean test // Execute maven
                     """	  
 		  }
 	  }
