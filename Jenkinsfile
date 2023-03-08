@@ -28,14 +28,14 @@ pipeline {
 	  }
 	  
 	  stage ("sonar-publish"){
+		  environment {
+                scannerHome = tool 'sonar'
+            }
 			steps {
-				echo "===========Performing Sonar Scan============"
-				script {
-                                scannerHome = tool name: 'sonar'
-					withSonarQubeEnv('sonar') {
-				sh "${tool("sonar")}/bin/sonar-scanner"
+				echo "===========Performing Sonar Scan============
+				withSonarQubeEnv('sonar') {
+				sh '${scannerHome}/bin/sonar-scanner --version'
                                  }
-				}
 			}
 		}
 	  
