@@ -34,11 +34,11 @@ pipeline {
 			steps {
 				echo "===========Performing Sonar Scan============"
 				script {
-                                scannerHome = tool 'sonar'
-				withSonarQubeEnv('sonar')
+                                scannerHome = tool name: 'sonar'
+					withSonarQubeEnv('sonar') {
 				sh "${tool("sonar")}/bin/sonar-scanner"
                                  }
-				
+				}
 			}
 		}
 	  
