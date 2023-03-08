@@ -32,7 +32,7 @@ pipeline {
             }
 			steps {
 				script {
-				echo "===========Performing Sonar Scan============
+				echo "===========Performing Sonar Scan============"
 				sh '${scannerHome}/bin/sonar-scanner --version'
                                  }
 			}
