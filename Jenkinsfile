@@ -35,8 +35,8 @@ pipeline {
 				script {
 				echo "===========Performing Sonar Scan============
 				withSonarQubeEnv('sonar') {
-				sh '${scannerHome}/bin/sonar-scanner --version'
 				}
+					sh '${scannerHome}/bin/sonar-scanner --version'
                                  }
 			}
 		}
