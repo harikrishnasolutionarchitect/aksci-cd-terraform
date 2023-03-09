@@ -38,7 +38,7 @@ spec:
         - name: appapinode-persistent-storage
           mountPath: /app
         ports:
-        - containerPort: 3000
+        - containerPort: 80
       volumes:
       - name: appapinode-persistent-storage
         persistentVolumeClaim:
@@ -55,5 +55,5 @@ spec:
   type: LoadBalancer
   ports:
   - protocol: TCP
-    port: 5000
-    targetPort: 3000
+    port: 80
+    targetPort: 80
