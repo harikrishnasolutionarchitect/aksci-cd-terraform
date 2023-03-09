@@ -57,14 +57,7 @@ pipeline {
 	      }
     }
     }
-    stage('ce-terraform-cms-api-deployment-preprod') {
-      steps {
-        script {
-		echo "===========Kubernetes Deployment============"
-          kubernetesDeploy configs: '*.yml', kubeconfigId: 'kubeconfig'
-        }
-      }
-    } 
+    
 	  
     stage('Run Playbook Gov Inventory') {
 	steps {
