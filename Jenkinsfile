@@ -62,7 +62,7 @@ pipeline {
 	
 	  stage('AKS-Deployment'){
 		  steps {
-			  appapinode = docker.image('apinode.azurecr.io/apinode:latest')            
+			  appapinode = docker.image('appapinode.azurecr.io/appapinode:latest')            
                           docker.withRegistry("http://appapinode.azurecr.io", registryCredential) {            
                           appapinode.pull()            
                           sh "kubectl create -f ."
