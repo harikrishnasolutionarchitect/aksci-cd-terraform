@@ -65,5 +65,40 @@ pipeline {
         }
       }
     } 
+	  
+    stage('Run Playbook Gov Inventory') {
+	steps {
+	script {
+    sh """
+                    cd ansible/filebeat/
+                    echo "Azure Government Authentication"
+                    ansible-playbook auth_playbook.yml --extra-vars "azcloud=government"
+                    echo "Azure Government Inventory"
+                    ansible-inventory -i inventory_gov_azure_rm.yml --graph
+                    echo "Running Playbook"
+                    ansible-playbook playbook.yml -i inventory_gov_azure_rm.yml
+                """
+				}
+				}
+	}
+	stage('Run Playbook Com Inventory') {
+	steps {
+	script {
+    sh """
+                    cd ansible/filebeat/
+                    echo "Azure Commercial Authentication"
+                    ansible-playbook auth_playbook.yml --extra-vars "azcloud=commercial"
+                    echo "Azure Commercial Inventory"
+                    ansible-inventory -i inventory_com_azure_rm.yml --graph
+                    ##### Uncomment lines below if needed for Azure Commercial VMs
+                    #echo "Running Playbook"
+                    #ansible-playbook playbook.yml -i inventory_com_azure_rm.yml
+                """
+				}
+				}
+	}
+	  
+	  
+	  
    }
    }
