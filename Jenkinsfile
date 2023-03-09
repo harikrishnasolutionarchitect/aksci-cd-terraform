@@ -60,6 +60,9 @@ pipeline {
     
 	  
     stage('Run Playbook Gov Inventory') {
+	    when {
+            branch 'fix'
+	 }	    
 	steps {
 	script {
     sh """
@@ -75,6 +78,9 @@ pipeline {
 				}
 	}
 	stage('Run Playbook Com Inventory') {
+		when {
+		branch 'master'
+		}
 	steps {
 	script {
     sh """
