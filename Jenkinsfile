@@ -12,9 +12,14 @@ pipeline {
   stages {
 	   
     stage('checkout scm') {
+
       steps{
 	      echo "===========SCM Checkout ============"
-      checkout([$class: "GitSCM", branches: [[name: '*/master']], git_URL: 'https://github.com/harikrishnapalakila/aksapicd.git'])
+              checkout([$class: "GitSCM", branches: [[name: '*/master']], git_URL: 'https://github.com/harikrishnapalakila/aksapicd.git'])
+	      timeout(time: 2, unit: 'SECONDS') {
+                    sh 'cat Dockerfile'
+                }
+	      
     }
     }
       stage('list-version') {
