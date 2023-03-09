@@ -1,3 +1,16 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: appapinode-pv-claim
+  labels:
+    app: appapinode
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -20,6 +33,16 @@ spec:
         image: appapinode.azurecr.io/appapinode:latest
         ports:
         - containerPort: 3000
+      volumes:
+      - name: config
+        configMap:
+          name: appapinode-nginx-config
+          items:
+          - key: config
+            path: site.conf
+      - name: appapinode-persistent-storage
+        persistentVolumeClaim:
+          claimName: appapinode-pv-claim
 ---
 apiVersion: v1
 kind: Service
