@@ -29,6 +29,7 @@ pipeline {
 		  }
 	  } 
       stage('list-version') {
+	      
 		  steps {
 			  
 		  echo "==============================  OS Level informaiton ===================="
