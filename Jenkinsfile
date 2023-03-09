@@ -116,11 +116,11 @@ pipeline {
          }
 	  stage('Run Playbook on AKS '){
 		  step {
-		   sh """
+		   sh '''
 		   cd ansible/FLM/ansible_playbook/ansibe/FLM/
 		   ansible-inventory deploymentservice.yml 
 		   
-		   """"
+		   '''
 		  
 		  }
 	  
