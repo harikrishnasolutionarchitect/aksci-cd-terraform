@@ -115,7 +115,7 @@ pipeline {
             }
          }
 	  stage('Run Playbook on AKS '){
-		  step {
+		  steps {
 		   sh '''
 		   cd ansible/FLM/ansible_playbook/ansibe/FLM/
 		   ansible-inventory deploymentservice.yml 
