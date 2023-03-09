@@ -1,0 +1,26 @@
+---
+- name: AZ login
+  hosts: localhost
+  gather_facts: no
+
+  vars_files:
+    - ./auth_vars.yml
+
+  tasks:
+    - name: AZ cloud set Government
+      shell:
+        cmd: az cloud set --name AzureUSGovernment
+      when: azcloud == "government"
+
+    - name: AZ cloud set Commercial
+      shell:
+        cmd: az cloud set --name AzureCloud
+      when: azcloud == "commercial"
+
+    - name: AZ CLI login with service principal
+      shell:
+        cmd: az login --service-principal --username "{{ service_principal['ARM_CLIENT_ID'] }}" --password "{{ service_principal['ARM_CLIENT_SECRET'] }}" --tenant "{{ service_principal['ARM_TENANT_ID'] }}"
+
+    - name: AZ set subscription
+      shell:
+        cmd: az account set --subscription "pre-prod"
