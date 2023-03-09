@@ -23,7 +23,7 @@ pipeline {
 		  steps {
 	      echo "================================================================="
 	      echo "===========timeout cat Dockerfile ============"
-	      timeout(time: 2, unit: 'SECONDS') {
+	      timeout(time: 10, unit: 'MINUTES') {
                     sh 'cat Dockerfile'
                 }
 		  }
