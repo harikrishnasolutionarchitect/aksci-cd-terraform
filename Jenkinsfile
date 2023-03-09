@@ -61,7 +61,7 @@ pipeline {
 	  
     stage('Run Playbook Gov Inventory') {
 	    when {
-            branch 'fix'
+            branch 'master'
 	 }	    
 	steps {
 	script {
