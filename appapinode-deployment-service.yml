@@ -31,6 +31,7 @@ spec:
     spec:
       containers:
       - name: nodeserver
+        imagePullPolicy: Always
         image: appapinode.azurecr.io/appapinode:latest
         ports:
         - containerPort: 3000
@@ -57,4 +58,3 @@ spec:
   - protocol: TCP
     port: 5000
     targetPort: 3000
-    nodePort: 31110
