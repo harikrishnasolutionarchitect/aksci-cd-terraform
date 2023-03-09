@@ -32,21 +32,10 @@ pipeline {
 		  echo "================== SAST==================="
 	          sh '''
 		   docker run -d --rm --volume \$(pwd) -p 9000:9000 sonarqube	
-		   env.status_code = sh(script: 'exit 0 # or 200 or other', returnStatus:true)
-                   println 'status_code: ' + env.status_code
 		   '''		  
 		  }
-	  }
-	  stage ("sonar-publish"){
-	   steps {
-		   script {
-			   echo "===========Performing Sonar Scan============"
-			   withSonarQubeEnv('sonar'){
-			   sh 'mvn sonar:sonar'
-			   }
-		   }
-	   }
-	  }
+	}
+	  
 	  
 	
     stage('Docker build') {
