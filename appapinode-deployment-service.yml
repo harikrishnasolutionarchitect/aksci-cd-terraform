@@ -5,6 +5,7 @@ metadata:
   labels:
     app: appapinode
 spec:
+  storageClassName: azuredisk-preminum-retain
   accessModes:
     - ReadWriteOnce
   resources:
