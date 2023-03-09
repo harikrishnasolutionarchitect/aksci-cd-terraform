@@ -109,6 +109,22 @@ pipeline {
 	}
 	  
 	  
+	  stage('Show downloaded Artifacts') {
+            steps {
+                sh 'ls -lr ansible/FLM/artifacts/'
+            }
+         }
+	  stage('Run Playbook on AKS '){
+		  step {
+		   sh """
+		   cd ansible/FLM/ansible_playbook/ansibe/FLM/
+		   ansible-inventory deploymentservice.yml 
+		   
+		   """"
+		  
+		  }
+	  
+	  } 
 	  
    }
    }
