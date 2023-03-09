@@ -32,7 +32,9 @@ pipeline {
 	   steps {
 		   script {
 			   echo "===========Performing Sonar Scan============"
-			   sh '${tool}/bin/sonar-scanner --version'
+			   withSonarQubeEnv('sonar'){
+			   sh 'mvn sonar:sonar'
+			   }
 		   }
 	   }
 	  }
