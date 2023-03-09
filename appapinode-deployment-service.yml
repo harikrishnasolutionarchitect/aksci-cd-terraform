@@ -52,7 +52,7 @@ metadata:
 spec:
   selector:
     app: nodeapp 
-  type: ClusterIP
+  type: Loadbalancer
   ports:
   - protocol: TCP
     port: 5000
