@@ -19,6 +19,16 @@ pipeline {
       checkout([$class: "GitSCM", branches: [[name: '*/master']], git_URL: 'https://github.com/harikrishnapalakila/aksapicd.git'])
     }
     }
+	  
+	  stage('list-version') {
+		  steps {
+		  sh '''
+		  	pwd
+		  '''
+		  
+		  }
+	  
+	  }
 	  stage('SAST'){
 		  steps {
 		  echo "================== SAST==================="
