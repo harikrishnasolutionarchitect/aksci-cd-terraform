@@ -37,17 +37,7 @@ pipeline {
 		  java -version && which java
 		  '''		  
 		  }
-	  }
-        stage('SAST'){
-		  steps {
-		  echo "================== SAST==================="
-	          sh '''
-		   docker run -d --rm --volume \$(pwd) -p 9000:9000 sonarqube	
-		   '''		  
-		  }
-	}
-	  
-	  
+	  }	  
 	
     stage('Docker build') {
 	    steps{
@@ -66,65 +56,21 @@ pipeline {
 	             appapinode.push('latest')
 	 }
 	      }
-    }
-    }
+          }
+          }    
     
-	  
-    stage('Run Playbook Gov Inventory') {
-	    when {
-            branch 'master'
-	 }	    
-	steps {
-	script {
-    sh """
-                    cd ansible/filebeat/
-                    echo "Azure Government Authentication"
-                    ansible-playbook auth_playbook.yml --extra-vars "azcloud=government"
-                    echo "Azure Government Inventory"
-                    ansible-inventory -i inventory_gov_azure_rm.yml --graph
-                    echo "Running Playbook"
-                    ansible-playbook playbook.yml -i inventory_gov_azure_rm.yml
-                """
-				}
-				}
-	}
-	stage('Run Playbook Com Inventory') {
-		when {
-		branch 'master'
-		}
-	steps {
-	script {
-    sh """
-                    cd ansible/filebeat/
-                    echo "Azure Commercial Authentication"
-                    ansible-playbook auth_playbook.yml --extra-vars "azcloud=commercial"
-                    echo "Azure Commercial Inventory"
-                    ansible-inventory -i inventory_com_azure_rm.yml --graph
-                    ##### Uncomment lines below if needed for Azure Commercial VMs
-                    #echo "Running Playbook"
-                    #ansible-playbook playbook.yml -i inventory_com_azure_rm.yml
-                """
-				}
-				}
-	}
-	  
-	  
-	  stage('Show downloaded Artifacts') {
-            steps {
-                sh 'ls -lr ansible/FLM/artifacts/'
-            }
-         }
-	  stage('Run Playbook on AKS '){
+	
+	  stage('AKS-Deployment'){
 		  steps {
-		   sh '''
-		   cd ansible/FLM/ansible_playbook/ansibe/FLM/
-		   ansible-inventory deploymentservice.yml 
-		   
-		   '''
-		  
+			  appapinode = docker.image('apinode.azurecr.io/apinode:latest')            
+                          docker.withRegistry("http://appapinode.azurecr.io", registryCredential) {            
+                          appapinode.pull()            
+                          sh "kubectl create -f ."
+    }
 		  }
 	  
-	  } 
+	  }
+   
 	  
    }
    }
