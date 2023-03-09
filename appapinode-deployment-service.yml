@@ -34,17 +34,11 @@ spec:
         imagePullPolicy: Always
         image: appapinode.azurecr.io/appapinode:latest
         volumeMounts:
-        - name: config
+        - name: appapinode-persistent-storage
           mountPath: /app
         ports:
         - containerPort: 3000
       volumes:
-      - name: config
-        configMap:
-          name: appapinode-nginx-config
-          items:
-          - key: config
-            path: site.conf
       - name: appapinode-persistent-storage
         persistentVolumeClaim:
           claimName: appapinode-pv-claim
