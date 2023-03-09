@@ -93,5 +93,25 @@ pipeline {
 	  
 	  }
 	  
+	  stage('AKS-Deployment Rollout to Finish'){
+		  steps {
+			  script {
+			  appapinode = docker.image('appapinode.azurecr.io/appapinode:latest')            
+                          docker.withRegistry("http://appapinode.azurecr.io", registryCredential) {            
+                          appapinode.pull()            
+                          sh "kubectl rollout status deployments/nodeapp-deployment"
+			  }
+                       }
+		 }
+	  }
+	  
+	  
+	  
+	  
+	  
+	
+	  
+	  
+	  
    }
    }
