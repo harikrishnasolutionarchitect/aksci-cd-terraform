@@ -16,14 +16,18 @@ pipeline {
       steps{
 	      echo "===========SCM Checkout ============"
               checkout([$class: "GitSCM", branches: [[name: '*/master']], git_URL: 'https://github.com/harikrishnapalakila/aksapicd.git'])
+	            }
+    }
+	 
+	  stage ('Dockefile disply'){
+		  steps {
 	      echo "================================================================="
 	      echo "===========timeout cat Dockerfile ============"
 	      timeout(time: 2, unit: 'SECONDS') {
                     sh 'cat Dockerfile'
                 }
-	      
-    }
-    }
+		  }
+	  } 
       stage('list-version') {
 		  steps {
 			  
