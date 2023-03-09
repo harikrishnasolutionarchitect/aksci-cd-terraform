@@ -60,6 +60,15 @@ pipeline {
           }
           }    
     
+	  stage('get-namespace-list'){
+		  steps {
+		  sh '''
+		  kubectl get ns 
+		  '''
+		  
+		  }
+	  
+	  }
 	
 	  stage('AKS-Deployment'){
 		  steps {
