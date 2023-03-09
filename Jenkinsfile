@@ -83,6 +83,15 @@ pipeline {
 	  
 	  }
    
+	  stage ('aks-workloads') {
+		  steps {
+		  sh '''
+		   kubectl get ns
+		   kubectl get deployment,svc -n
+		  '''
+		  }
+	  
+	  }
 	  
    }
    }
