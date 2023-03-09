@@ -20,9 +20,6 @@ pipeline {
     }
     }
 	  stage('SAST'){
-		  when (BRANCH_NAME != 'master') {
-		  echo 'Excecuted only on master branch.'
-		  }
 		  steps {
 		  echo "================== SAST==================="
 	          sh '''
@@ -30,8 +27,6 @@ pipeline {
 		   '''		  
 		  }
 	  }
-	  
-	  
 	  stage ("sonar-publish"){
 	   steps {
 		   script {
