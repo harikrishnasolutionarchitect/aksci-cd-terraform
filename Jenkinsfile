@@ -8,37 +8,32 @@ pipeline {
   registryUrl = "appapinode.azurecr.io"
   registryCredential = 'ACR'
   appapinode = ''  
-	  
-	  
-	  
-  }
+	  }
   stages {
+	   
     stage('checkout scm') {
       steps{
 	      echo "===========SCM Checkout ============"
       checkout([$class: "GitSCM", branches: [[name: '*/master']], git_URL: 'https://github.com/harikrishnapalakila/aksapicd.git'])
     }
     }
-	  
-	  stage('list-version') {
+      stage('list-version') {
 		  steps {
 			  
 		  echo "==============================  OS Level informaiton ===================="
 		  sh '''
 		  pwd
 		  java -version && which java
-		  
-		  
-		  '''
-		  
+		  '''		  
 		  }
-	  
 	  }
-	  stage('SAST'){
+        stage('SAST'){
 		  steps {
 		  echo "================== SAST==================="
 	          sh '''
 		   docker run -d --rm --volume \$(pwd) -p 9000:9000 sonarqube	
+		   env.status_code = sh(script: 'exit 0 # or 200 or other', returnStatus:true)
+                   println 'status_code: ' + env.status_code
 		   '''		  
 		  }
 	  }
