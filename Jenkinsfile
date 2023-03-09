@@ -22,8 +22,13 @@ pipeline {
 	  
 	  stage('list-version') {
 		  steps {
+			  
+		  echo "==============================  OS Level informaiton ===================="
 		  sh '''
-		  	pwd
+		  pwd
+		  java -version && which java
+		  
+		  
 		  '''
 		  
 		  }
