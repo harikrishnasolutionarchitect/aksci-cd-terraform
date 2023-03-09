@@ -3,7 +3,7 @@ apiVersion: storage.k8s.io/v1
 metadata: 
   name: azuredisk-preminum-retain 
 provisioner: kubernetes.io/azure-disk
-reclaimPolicy: Retain
+reclaimPolicy: Delete
 volumeBindingMode: WaitForFirstConsumer
 allowVolumeExpansion: true 
 parameters:
