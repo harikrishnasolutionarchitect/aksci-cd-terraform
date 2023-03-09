@@ -33,6 +33,9 @@ spec:
       - name: nodeserver
         imagePullPolicy: Always
         image: appapinode.azurecr.io/appapinode:latest
+        volumeMounts:
+        - name: config
+          mountPath: /app
         ports:
         - containerPort: 3000
       volumes:
