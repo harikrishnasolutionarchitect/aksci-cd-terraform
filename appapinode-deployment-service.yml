@@ -2,6 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: appapinode-pv-claim
+  namespace: dev
   labels:
     app: appapinode
 spec:
@@ -16,7 +17,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nodeapp-deployment
-  namespace: default
+  namespace: dev
   labels:
     app: nodeapp
 spec:
@@ -47,6 +48,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: nodeapp-service
+  namespace: dev
 spec:
   selector:
     app: nodeapp 
