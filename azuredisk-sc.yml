@@ -4,9 +4,9 @@ metadata:
   name: azuredisk-standard-retain
   namespace: dev
 provisioner: kubernetes.io/azure-disk
-reclaimPolicy: Delete   # Retain or Delete
-volumeBindingMode: WaitForFirstConsumer   # WaitForFirstConsumer or Immediate
-allowVolumeExpansion: true    # true or false
+reclaimPolicy: Delete   ## Retain or Delete
+volumeBindingMode: WaitForFirstConsumer   ## WaitForFirstConsumer or Immediate
+allowVolumeExpansion: true    ## true or false
 parameters:
-  storageaccounttype: Standard_LRS   # Premium or Standard
+  storageaccounttype: Standard_LRS   ## Premium or Standard
   kind: Managed  
