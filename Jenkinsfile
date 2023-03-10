@@ -9,8 +9,7 @@ pipeline {
   registryCredential = 'ACR'
   appapinode = ''  
 	  }
-  stages {
-	   
+  stages {	   
     stage('checkout scm') {
 
       steps{
