@@ -9,4 +9,4 @@ volumeBindingMode: WaitForFirstConsumer   # WaitForFirstConsumer or Immediate
 allowVolumeExpansion: true    # true or false
 parameters:
   storageaccounttype: Standard_LRS   # Premium or Standard
-  kind: Managed 
+  kind: Managed  
