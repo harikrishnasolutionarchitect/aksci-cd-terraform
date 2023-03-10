@@ -13,7 +13,7 @@ metadata:
 spec:
   storageClassName: azuredisk-standard-retain
   accessModes:
-    - ReadOnlyMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: 5Gi
