@@ -11,6 +11,8 @@ pipeline {
 	  }
   stages {	   
     stage('checkout scm') {
+	    
+	    
 
       steps{
 	      echo "===========SCM Checkout ============"
