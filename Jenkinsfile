@@ -86,7 +86,7 @@ pipeline {
 		  steps {
 		  sh '''
 		   kubectl get ns
-		   kubectl get sc,pvc,pv,deployment,svc -n default
+		   kubectl get sc,pvc,svc,deployment,pod,pv -n dev
 		  '''
 		  }
 	  
