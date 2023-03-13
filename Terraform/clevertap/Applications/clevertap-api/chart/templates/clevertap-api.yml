@@ -1,0 +1,82 @@
+{{ if .Values.services.clevertap_api.active }}
+{{- $deploy_name := "clevertap-api" -}}
+{{- $deploy_id := print .Values.global.stack "-" $deploy_name }}
+{{- $deploy := .Values.services.clevertap_api -}}
+{{- $_ := set $deploy "global" .Values.global }}
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: {{ $deploy_id }}
+    {{ include "deploy.labels" $deploy | nindent 4 | trim }}
+  annotations:
+    {{ include "deploy.annotations" $deploy | nindent 4 | trim }}
+  name: {{ $deploy_id }}
+spec:
+  ports:
+  - port: 80
+  selector:
+    app: {{ $deploy_id }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ $deploy_id }}
+    {{ include "deploy.labels" $deploy | nindent 4 | trim }}
+  annotations:
+    {{ include "deploy.annotations" $deploy | nindent 4 | trim }}
+  name: {{ $deploy_id }}
+spec:
+  replicas: {{ $deploy.replicas }}
+  selector:
+    matchLabels:
+      app: {{ $deploy_id }}
+  template:
+    metadata:
+      labels:
+        app: {{ $deploy_id }}
+        {{ include "deploy.labels" $deploy | nindent 8 | trim }}
+      annotations:
+        checksum/clevertap-api-secrets: {{ include (print $.Template.BasePath "/secrets/clevertap-api-secrets.yml") . | sha256sum }}
+    spec:
+      {{ if .Values.global.use_image_pull_secret }}
+      imagePullSecrets:
+      - name: aws-registry
+      {{ end }}
+      initContainers:
+      {{ include "waitfors" $deploy | nindent 6 | trim }}
+      dnsConfig:
+        options:
+          - name: single-request-reopen
+          - name: ndots
+            value: "{{ .Values.global.dns.ndots }}"
+      containers:
+      - name: {{ $deploy_id }}
+        image: {{ $deploy.image }}
+        imagePullPolicy: Always
+        startupProbe:
+          exec:
+            command:
+            - sh
+            - '-c'
+            - >-
+              curl -s -o /dev/null -I -w "%{http_code}"
+              http://localhost/health | grep '[2-3][0-9][0-9]'
+          initialDelaySeconds: {{ .Values.services.clevertap_api.startupProbe.initialDelaySeconds }}
+          failureThreshold: {{ .Values.services.clevertap_api.startupProbe.failureThreshold }}
+          timeoutSeconds: {{ .Values.services.clevertap_api.startupProbe.timeoutSeconds }}
+        ports:
+          - { name: http, containerPort: 80 }
+        env:
+        - { name: NEW_RELIC_APP_NAME, value: "{{ .Values.services.clevertap_api.newrelic.app_name }}" }
+        - { name: NEW_RELIC_ENABLED, value: "{{ .Values.services.clevertap_api.newrelic.active }}" }
+        - { name: NEW_RELIC_DISTRIBUTED_TRACING_ENABLED, value: "{{ .Values.services.clevertap_api.newrelic.distributed_tracing }}" }
+        {{ include "envvars" $deploy | nindent 8 | trim }}
+        {{ include "configserver_dotnet" $deploy | nindent 8 | trim }}
+        envFrom:
+          - secretRef:
+              name: {{ $deploy_id }}-secrets
+        {{ include "container_reqs" $deploy | nindent 8 | trim }}
+
+{{ end }}
