@@ -57,7 +57,7 @@ metadata:
 spec:
   selector:
     app: nodeapp 
-  type: LoadBalancer
+  type: ClusterIP
   ports:
   - protocol: TCP
     port: 8080
