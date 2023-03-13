@@ -1,0 +1,44 @@
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: appapinode-ingress
+  annotations:
+    kubernetes.io/ingress.class: azure/application-gateway
+spec:
+  tls:
+    hosts:
+	  aspnetapp.com 
+	  clevertap.com
+	secretName: appapinode-ingress-secret
+  rules:
+  - http:
+      paths:
+      - path: /
+        backend:
+          service:
+            name: nodeapp-service
+            port:
+              number: 80
+        pathType: Exact	
+     - path: /behavioral-analytics/
+        backend:
+          service:
+            name: behavioral-analytics
+            port:
+              number: 80
+        pathType: Exact	
+     - path: /segmentation/
+        backend:
+          service:
+            name: segmentation
+            port:
+              number: 80
+        pathType: Exact	
+     - path: /travel-transportation/
+        backend:
+          service:
+            name: travel-transportation
+            port:
+              number: 80
+        pathType: Exact			
